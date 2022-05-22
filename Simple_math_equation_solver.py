@@ -7,11 +7,13 @@ allowed = ["-", "+", "*"]
 def eq_order(operator_path, nb):
     available_nb = nb.copy()
     available_op = operator_path.copy()
+    #multiplication must be done first
     while "*" in available_op:
         mul_poz = available_op.index("*")
         available_op.pop(mul_poz)
         mul_result = available_nb[mul_poz] * available_nb.pop(mul_poz+1)
         available_nb[mul_poz] = mul_result
+    #if there is no multiplication then rest operations can be done
     while available_op != []:
         if available_op[0] == "-":
             available_op.pop(0)
@@ -29,8 +31,8 @@ def find_all_solutions(operator_path: List[str], expected_result: int) -> Union[
             raise ValueError("Wrong operator")
     if type(expected_result) is not int:
         raise ValueError("Expected result is not int")
-    if len(operator_path) > len(numbers):
-        raise ValueError("Too much operators!")
+    if len(operator_path) >= len(numbers):
+        raise ValueError("Too many operators!")
     perm = permutations(numbers, len(operator_path) + 1)
     result = []
     for i in perm:
