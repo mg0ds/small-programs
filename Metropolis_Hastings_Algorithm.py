@@ -21,15 +21,15 @@ def metropolis_hastings(
     if n_samples <= 0:
         raise ValueError("n_samples needst to be positive!")
 
-    N = n_samples
     samples_mc = [x_0]
-    for i in range(N):
-        x_next = np.random.normal(loc=samples_mc[-1], scale=1)
-        prob = min(1, f(x_next) / f(samples_mc[-1]))
+    for i in range(n_samples):
+        x_t = samples_mc[-1]
+        x_next = np.random.normal(loc=x_t, scale=1)
+        prob = min(1, f(x_next) / f(x_t))
         if np.random.uniform(0, 1) <= prob:
             samples_mc.append(x_next)
         else:
-            samples_mc.append(samples_mc[-1])
+            samples_mc.append(x_t)
     result = np.array(samples_mc[1:])
     return result
 
