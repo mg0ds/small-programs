@@ -2,14 +2,6 @@ from collections import deque
 
 # Breadth First Search pathfinding algorithm
 
-"""
-00000
-01100
-10000
-10111
-00000
-"""
-
 def check_neighbors(node):
     # take positions in all four directions that we can go to
     directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
@@ -20,6 +12,14 @@ def check_neighbors(node):
             can_go_to.append(neighbor)
     return can_go_to
 
+
+"""
+00000
+01100
+10000
+10111
+00000
+"""
 test_grid = [[(0, 0, True), (0, 1, True), (0, 2, True), (0, 3, True), (0, 4, True)],
 [(1, 0, True), (1, 1, False), (1, 2, False), (1, 3, True), (1, 4, True)],
 [(2, 0, False), (2, 1, True), (2, 2, True), (2, 3, True), (2, 4, True)],
